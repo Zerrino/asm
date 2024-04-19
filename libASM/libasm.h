@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:00:10 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/19 10:49:21 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:29:25 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t	ft_strlen(const char *);
 char	*ft_strcpy(char *, const char *);
 char	*ft_strdup(const char *);
 int		ft_strcmp(const char *, const char *);
+int		ft_atoi_base(char *, char *);
 void	*ft_malloc(size_t size);
 
 #endif

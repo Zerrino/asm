@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:59:28 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/19 11:19:34 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/19 14:53:48 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 int  main(int argc, char **argv)
 {
 
-	(void)argc;
-	(void)argv;
-	write(1, ft_strdup("hey"), 4);
+	if (argc < 2)
+		return (0);
+	printf("Nb : %d\n", ft_atoi_base(argv[1], argv[2]));
 	return (0);
 }

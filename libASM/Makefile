@@ -6,7 +6,7 @@
 #    By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 16:07:48 by alexafer          #+#    #+#              #
-#    Updated: 2024/04/19 10:49:39 by alexafer         ###   ########.fr        #
+#    Updated: 2024/04/19 11:28:44 by alexafer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,10 @@ NASM = nasm
 NASMFLAGS = -f macho64
 SRC_DIR = .
 INC_DIR = .
-SRCS =  ft_write.s ft_strlen.s ft_strcpy.s ft_strcmp.s ft_read.s ft_malloc.s ft_strdup.s
+SRCS =  ft_write.s ft_strlen.s\
+	   	ft_strcpy.s ft_strcmp.s\
+	   	ft_read.s ft_malloc.s\
+	   	ft_strdup.s ft_atoi_base.s
 MAIN = main.c
 
 BONUS = 
