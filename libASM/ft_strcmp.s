@@ -1,8 +1,6 @@
 section	.text
 	global	_ft_strcmp
 
-;	rdi str : char *  rsi char *
-
 _ft_strcmp:
 		mov		al, BYTE [rdi]
 		mov		bl, BYTE [rsi]
@@ -18,6 +16,6 @@ _ft_strcmp:
 
 ft_finish:
 		movzx	rax, al
-		movzx	rbx, bl
-		sub		rax, rbx
+		movzx	rdx, bl
+		sub		rax, rdx
 		ret
