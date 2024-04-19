@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:59:28 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/19 04:38:13 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/19 11:19:34 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,9 @@
 
 int  main(int argc, char **argv)
 {
-	char	*str;
 
 	(void)argc;
 	(void)argv;
-	str = (char *)ft_malloc(sizeof(char) * 2);
-	if (!str)
-		return (0);
-	str[0] = 'a';
-	str[1] = '\0';
-	str[1200000000] = 'a';
-	printf("hey : %s\n", str);
-	printf("hey : %c\n", str[1200000000]);
-
-	
+	write(1, ft_strdup("hey"), 4);
 	return (0);
 }
