@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 09:59:28 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/20 19:14:23 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/22 19:21:00 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 int  main(int argc, char **argv)
 {
-	if (argc > 2)
-		printf("nb : %d\n", ft_atoi_base(argv[1], argv[2]));
+	(void)argc;
+	//(void)argv;
+	ft_write(1, "Hey!\n", 5);
 	return (0);
 }

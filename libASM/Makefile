@@ -6,7 +6,7 @@
 #    By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 16:07:48 by alexafer          #+#    #+#              #
-#    Updated: 2024/04/19 11:28:44 by alexafer         ###   ########.fr        #
+#    Updated: 2024/04/22 17:32:57 by alexafer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,24 +31,24 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@ar -rcs $@ $^
-	@make compile
+	#@make compile
 
 bonus: $(BONUS_OBJ)
 	@ar -rcs $(NAME) $^
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.s
-	$(NASM) $(NASMFLAGS) $< -o $@
+	$(NASM) $(NASMFLAGS) -I./. $< -o $@
 
 compile:
-	$(CC) $(CFLAGS) $(MAIN) $(NAME)
-	@./a.out
+	$(CC) $(CFLAGS) -I./. $(MAIN) $(NAME)
+	#@./a.out
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJ)
 
 fclean: clean
 	rm -f $(NAME)
-	rm -r a.out
+	#rm -r a.out
 
 re: fclean all
 

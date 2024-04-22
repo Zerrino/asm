@@ -5,7 +5,8 @@ _ft_strlen:
 		mov		rax, 0
 		cmp		rdi, 0
 		je		ft_ret
-
+		cmp		BYTE [rax + rdi], 0
+		je		ft_ret
 ft_loop:
 		inc		rax
 		cmp		BYTE [rax + rdi], 0
