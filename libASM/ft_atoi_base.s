@@ -187,6 +187,7 @@ ft_no_err:
 		mov		r9, rsi
 		mov		r13, 0	; r13 sera le resultat
 		mov		r14, 1	; r14 sera le sign
+		mov		r15, r13
 ft_sign:
 		cmp		BYTE [rdi + rax], '+'
 		je		ft_sign_plus
@@ -202,12 +203,21 @@ ft_true_loop:
 		call	_ft_is_inside
 		cmp		rax, -1
 		je		ft_is_result
+		mov		r15, r13
 		imul	r13, r11
 		add		r13, rax
+		cmp		r15, r13
+		ja		ft_overflow
 		inc		r10
 		jmp		ft_true_loop
 
 ft_is_result:
 		mov		rax, r13
 		imul	rax, r14
+		ret
+
+ft_overflow:
+		mov		rax, r14
+		not		rax
+		sar		rax, 1
 		ret
