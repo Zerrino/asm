@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:45:53 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/23 19:51:22 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:15:51 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,37 +19,37 @@
 #include <stdlib.h>
 #include <errno.h>
 
+int	ft_tester(int a, int b)
+{
+	return (a - b);
+}
+
 int  main(int argc, char **argv)
 {
-	int		a_;
-	int		b_;
-	int		c_;
-	int		*a;
-	int		*c;
-	int		*b;
 	t_list	*hey;
+	char	*a = "Hey!";
+	char	*b = "Ho";
+	char	*c = "To";
+	char	*d = "So";
 
-	b_ = 14;
-	c_ = 17;
-	a_ = 20;
-
-
-	a = &a_;
-	b = &b_;
-	c = &c_;
 
 	hey = ft_create_elem((void *)a);
 	ft_list_push_front(&hey, (void *)b);
 	ft_list_push_front(&hey, (void *)c);
+	ft_list_push_front(&hey, (void *)d);
 	printf("%d\n", ft_list_size(hey));
-	printf("nb 1: %d\n", *(int *)hey->data);
-	printf("nb 2: %d\n", *(int *)hey->next->data);
-	printf("nb 3: %d\n", *(int *)hey->next->next->data);
-	
+	printf("nb 1: %s\n", (char *)hey->data);
+	printf("nb 2: %s\n", (char *)hey->next->data);
+	printf("nb 3: %s\n", (char *)hey->next->next->data);
+	printf("nb 4: %s\n", (char *)hey->next->next->next->data);
 	printf("\n\n\n\n");
-	printf("nb 1: %d\n", *(int *)hey->data);
-	printf("nb 2: %d\n", *(int *)hey->next->data);
-	printf("nb 3: %d\n", *(int *)hey->next->next->data);
+	printf("output : %s\n", ft_list_sort(&hey, ft_strcmp));
+	//ft_list_sort(&hey, &ft_strcmp);
+	printf("\n\n\n\n");	
+	printf("nb 1: %s\n", (char *)hey->data);
+	printf("nb 2: %s\n", (char *)hey->next->data);
+	printf("nb 3: %s\n", (char *)hey->next->next->data);
+	printf("nb 4: %s\n", (char *)hey->next->next->next->data);
 	(void)argc;
 	(void)argv;
 	return (0);
