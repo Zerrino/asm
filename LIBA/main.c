@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:45:53 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/25 12:15:51 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/25 12:51:09 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int  main(int argc, char **argv)
 	printf("nb 3: %s\n", (char *)hey->next->next->data);
 	printf("nb 4: %s\n", (char *)hey->next->next->next->data);
 	printf("\n\n\n\n");
-	printf("output : %s\n", ft_list_sort(&hey, ft_strcmp));
+	printf("len : %d\n", ft_list_size(hey));
+	printf("output : %d\n", ft_list_sort(&hey, ft_strcmp));
 	//ft_list_sort(&hey, &ft_strcmp);
 	printf("\n\n\n\n");	
 	printf("nb 1: %s\n", (char *)hey->data);

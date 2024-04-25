@@ -4,32 +4,18 @@ section	.text
 ;	ft_strcmp (rdi, rsi
 ;	rdi, rsi
 
+
 _ft_list_sort:
-		mov		rax, 0
-		mov		r15, rsi ; ft_strcmp dans r15
-		mov		r8, [rdi] ; on met la lst dans r8
+		mov			r15, rsi ; ft_strcmp dans r15
+		mov			r14, rdi ; on met la list **lst dans r14
+		mov			rdi, [r14] ; *lst dans rdi
+		call	_ft_list_size ; on chope la len dans RAX
+		mov		r8, rax		; r8 = len lst
 
-		mov		rdi, r8 ; on remet list dans rdi pour lst size
-		
 
-		call	_ft_list_size
-		;mov		r9, rax ; LEN de lst size
-		;mov		rcx, rax ; rcp len const
-		;dec		rcx
-		;cmp		r9, 2
-		;js		ft_ret
+		mov			r14, [r14] ; *lst = r14
 
 
 
 
-ft_swap:
-		;mov		r10, r12
-		;mov		r11, r13
-		;mov		r12, r11
-		;mov		r13, r10
-		ret
-ft_ret:	
-		;mov		r8, [r8]
-		;mov		rax, r8
-		mov			rax, 0
 		ret
