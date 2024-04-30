@@ -6,7 +6,7 @@
 #    By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 16:07:48 by alexafer          #+#    #+#              #
-#    Updated: 2024/04/30 12:50:11 by alexafer         ###   ########.fr        #
+#    Updated: 2024/04/30 13:41:36 by alexafer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ BONUS = ft_atoi_base.s\
 	   	ft_list_size.s\
 	   	ft_create_elem.s\
 	   	ft_list_push_front.s\
-		ft_list_sort.s
+		ft_list_sort.s\
+		ft_list_remove_if.s
 
 OBJS = $(addprefix $(SRC_DIR)/, $(SRCS:.s=.o))
 BONUS_OBJ = $(addprefix $(SRC_DIR)/, $(BONUS:.s=.o))

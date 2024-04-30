@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:45:53 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/30 13:06:44 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:41:20 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+
+void	ft_remove(void *s)
+{
+	(*(char *)s) = 'X';
+}
 
 int	ft_tester(int a, int b)
 {
@@ -53,7 +58,7 @@ int  main(int argc, char **argv)
 	}
 	hey = hey2;
 	printf("ft_list_size : %d\n", ft_list_size(hey));
-	printf("nb : %d\n", ft_list_sort(&hey, ft_strcmp));
+	printf("nb : %d\n", ft_list_remove_if(&hey, (void *)argv[argc - 1], ft_tester, ft_remove));
 	printf("After sorting : \n\n");
 	hey2 = hey;
 	i = 0;
