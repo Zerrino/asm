@@ -6,7 +6,7 @@
 #    By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 16:07:48 by alexafer          #+#    #+#              #
-#    Updated: 2024/04/23 18:22:33 by alexafer         ###   ########.fr        #
+#    Updated: 2024/04/30 12:50:11 by alexafer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS =  ft_write.s ft_strlen.s\
 
 
 MAIN = main.c
-
+MAIN2 = main2.c
 BONUS = ft_atoi_base.s\
 	   	ft_list_size.s\
 	   	ft_create_elem.s\
@@ -48,6 +48,10 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.s
 
 compile:
 	$(CC) $(CFLAGS) -I./. $(MAIN) $(NAME)
+	#@./a.out
+
+compile2:
+	$(CC) $(CFLAGS) -I./. $(MAIN2) $(NAME)
 	#@./a.out
 
 clean:

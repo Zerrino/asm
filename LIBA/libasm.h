@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 10:00:10 by alexafer          #+#    #+#             */
-/*   Updated: 2024/04/25 12:53:56 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:06:52 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_list
 int		ft_atoi_base(char *, char *);
 int		ft_list_size(t_list *);
 void	ft_list_push_front(t_list **, void *);
-char	*ft_list_sort(t_list **, int (*cmp)());
+int		ft_list_sort(t_list **, int (*cmp)());
 t_list	*ft_create_elem(void *);
 
 #endif
