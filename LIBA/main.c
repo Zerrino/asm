@@ -58,7 +58,9 @@ int  main(int argc, char **argv)
 	}
 	hey = hey2;
 	printf("ft_list_size : %d\n", ft_list_size(hey));
-	printf("nb : %d\n", ft_list_remove_if(&hey, (void *)argv[argc - 1], ft_tester, ft_remove));
+	ft_write(1, "hey\n", 4);
+	ft_list_sort(&hey, ft_strcmp);	
+	//printf("nb : %d\n", ft_list_remove_if(&hey, (void *)argv[argc - 1], ft_tester, ft_remove));
 	printf("After sorting : \n\n");
 	hey2 = hey;
 	i = 0;

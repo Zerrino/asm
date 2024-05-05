@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME = libasm.a
+MODULE = arch -x86_64
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NASM = nasm
@@ -38,21 +39,21 @@ BONUS_OBJ = $(addprefix $(SRC_DIR)/, $(BONUS:.s=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@ar -rcs $@ $^
+	$(MODULE) ar -rcs $@ $^
 	#@make compile
 
 bonus: $(BONUS_OBJ)
-	@ar -rcs $(NAME) $^
+	$(MODULE) ar -rcs $(NAME) $^
 
 $(SRC_DIR)/%.o: $(SRC_DIR)/%.s
 	$(NASM) $(NASMFLAGS) -I./. $< -o $@
 
 compile:
-	$(CC) $(CFLAGS) -I./. $(MAIN) $(NAME)
+	$(MODULE) $(CC) $(CFLAGS) -I./. $(MAIN) $(NAME)
 	#@./a.out
 
 compile2:
-	$(CC) $(CFLAGS) -I./. $(MAIN2) $(NAME)
+	$(MODULE) $(CC) $(CFLAGS) -I./. $(MAIN2) $(NAME)
 	#@./a.out
 
 clean:
