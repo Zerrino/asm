@@ -6,7 +6,7 @@
 /*   By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 17:45:53 by alexafer          #+#    #+#             */
-/*   Updated: 2024/05/07 06:28:07 by alexafer         ###   ########.fr       */
+/*   Updated: 2024/05/07 07:06:24 by alexafer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@ void	ft_remove(void *s)
 	(*(char *)s) = 'x';
 }
 
-int		ft_cmp(void *a, void *b)
-{
-	(void)a;
-	(void)b;
-	return (0);
-}
 
 int	ft_tester(int a, int b)
 {
@@ -66,7 +60,7 @@ int  main(int argc, char **argv)
 	hey = hey2;
 	printf("ft_list_size : %d\n", ft_list_size(hey));
 	//ft_list_sort(&hey, ft_strcmp);	
-	printf("nb : %d\n", ft_list_remove_if(&hey, (void *)"avc", ft_cmp, ft_remove));
+	printf("nb : %d\n", ft_list_remove_if(&hey, (void *)"avc", ft_strcmp, ft_remove));
 	printf("After sorting : \n\n");
 	hey2 = hey;
 	i = 0;

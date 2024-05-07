@@ -20,6 +20,19 @@ section	.text
 		pop				rdi
 %endmacro
 
+%macro SAVE_VARS 0
+	push r8					; pushin r8
+	push r9					; pushin r9
+	sub rsp, 8				; aligning stack
+%endmacro
+
+%macro GET_VARS 0
+	add rsp, 8				; remove alignment
+	pop r9					; poping r9
+	pop r8					; poping r8
+%endmacro
+
+
 _ft_list_remove_if:
 		S_ARGS
 		cmp				[rsp + 24], word 0
@@ -30,12 +43,15 @@ _ft_list_remove_if:
 		je				ft_ret
 		mov				r8, [rdi]
 		mov				r9, 0
+
 ft_loop:
 		cmp				r8, 0
 		je				ft_ret	
 		mov				rdi, [r8]
 		mov				rsi, [rsp + 16]
-		call			[rsp + 8]
+		SAVE_VARS
+		call			[rsp + 32]
+		GET_VARS
 		cmp				rax, 0
 		je				ft_remove
 		mov				r9, r8
@@ -57,12 +73,14 @@ ft_no_p:
 
 ft_free_data:
 		mov				rdi, [r8]
-		call			[rsp + 16]
+		SAVE_VARS
+		call			[rsp + 24]
+		GET_VARS
 		mov				rdi, r8
 		mov				r8, [r8 + 8]
-		sub				rsp, 8
+		SAVE_VARS
 		call			_free
-		add				rsp, 8
+		GET_VARS
 		jmp				ft_loop
 
 ft_ret:
