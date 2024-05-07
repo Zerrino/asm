@@ -6,14 +6,14 @@
 #    By: alexafer <alexafer@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/23 16:07:48 by alexafer          #+#    #+#              #
-#    Updated: 2024/04/30 13:41:36 by alexafer         ###   ########.fr        #
+#    Updated: 2024/05/07 06:09:47 by alexafer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libasm.a
 MODULE = arch -x86_64
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 NASM = nasm
 NASMFLAGS = -f macho64
 SRC_DIR = .
