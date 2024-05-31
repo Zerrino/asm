@@ -1,0 +1,38 @@
+# HELLO WORLD EN BINARY HEHEH
+		# OFFSETT ; EXPLICATIONS
+7F 45 4C 46	# 0 - 3 LE MAGIC NBER ELF
+01		# 4 ; 1 = 32bit, 2 = 64bit (ON choisis 32 ?)
+02		# 5 ; BIG OR LITLLE ENDIAN, LITLLE = 1 BIG = 2
+01		# 6 ; version d'elf c'est 1 quoi car c'est la V1
+03		# 7 ; on va dire linux, qui est egal a 3 omg trop style
+00		# 8 ; target OS ABI ? aucune ideee mdrrr
+00 00 00 00 00	#
+00 00		# du padding askip
+
+00 02		# e_type donc le type 2 etant executable
+00 03		# x86 donc l'architecturel quoi
+00 00 00 01	# elf identification donc 1 facile jusque ka
+
+00 00 00 00	# e_entry en gros memory adressof entroy proint ou le process start???
+00 00 00 34	# e_phoff ou le header commence 34 pour 32but et 40 pour 64 ?
+00 00 00 00	# e_shoff ou le header table commence mais bon y en a pas?
+00 00 00 00	# e_flags askip 0 pour x86
+00 34		# e_ehsize 52 pour du x32, donc 0x34 en hexa
+00 20		# e_phentsize 0x20 pour 32 bit
+00 01		# e_phnum un seul program
+00 28		# e_shentsize 0x28 pour 32 bit
+00 00		# e_shnum le nombre de section header table (0) ici
+00 00		# e_shstrndx
+# PROGRAM HEADER
+00 00 00 01	# p_type 1 = loadable segment
+00 00 00 54 	# p_offset ? aucune idee
+08 04 80 54	# p_vaddr ??
+00 00 00 00	# p_paddr ??
+00 00 00 0C	# p_memsz ??
+00 00 00 05	# p_flags 1:x 2:w 4:r
+00 00 10 00	# P_align 1000 for x86 ?
+
+
+# LA STRING HELLO WORLD
+# Hello World!\n
+48 65 6C 6C 6F 20 57 6F 72 6C 64 21 0A
