@@ -37,9 +37,9 @@
 54 80 04 08     # 40 p_vaddr: virtual address of segment in memory (x86: 08048054)
     
 00 00 00 00     # 44 p_paddr: physical address of segment, unspecified by 386 supplement
-0C 00 00 00     # 48 p_filesz: size in bytes of the segment in the file image ############
+D6 01 00 00     # 48 p_filesz: size in bytes of the segment in the file image ############
 
-0C 00 00 00     # 4C p_memsz: size in bytes of the segment in memory; p_filesz <= p_memsz
+D6 01 00 00     # 4C p_memsz: size in bytes of the segment in memory; p_filesz <= p_memsz
 05 00 00 00     # 50 p_flags: segment-dependent flags (1: X, 2: W, 4: R)
 
 00 10 00 00     # 54 p_align: 1000 for x86

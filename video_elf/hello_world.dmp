@@ -30,9 +30,9 @@
 78 00 40 00 00 00 00 00 # p_vaddr
 78 00 40 00 00 00 00 00 # p_paddr
 
-2C 00 00 00 00 00 00 00 # p_filesz
-2C 00 00 00 00 00 00 00 # p_memsz
-08 00 00 00 00 00 00 00 # p_align
+01 00 00 00 00 00 00 00 # p_filesz
+01 00 00 00 00 00 00 00 # p_memsz
+00 00 00 00 00 00 00 00 # p_align
 # fin prof header
 #
 48 65 6c 6c 6f 21 0a # string hello world de len 13
