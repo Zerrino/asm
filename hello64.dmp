@@ -1,0 +1,134 @@
+# >>>>>>>>>>>>> ELF FILE HEADER <<<<<<<<<<<<< 
+                # All numbers (except in names) are in base sixteen (hexadecimal)
+                # 00 <- number of bytes listed so far
+7F 45 4C 46     # 04 e_ident[EI_MAG]: ELF magic number
+02              # 05 e_ident[EI_CLASS]: 1: 32-bit, 2: 64-bit
+   01           # 06 e_ident[EI_DATA]: 1: little-endian, 2: big-endian
+      01        # 07 e_ident[EI_VERSION]: ELF header version; must be 1
+         00     # 08 e_ident[EI_OSABI]: Target OS ABI; should be 0
+
+00              # 09 e_ident[EI_ABIVERSION]: ABI version; 0 is ok for Linux
+   00 00 00     # 0C e_ident[EI_PAD]: unused, should be 0
+00 00 00 00     # 10
+
+02 00           # 12 e_type: object file type; 2: executable
+      3E 00     # 14 e_machine: instruction set architecture; 3: x86, 3E: amd64
+01 00 00 00     # 18 e_version: ELF identification version; must be 1
+
+D5 80 04 08 00 00 00 00    # 1C e_entry: memory address of entry point (where process starts)
+40 00 00 00 00 00 00 00    # 20 e_phoff: file offset where program headers begin
+
+00 00 00 00 00 00 00 00     # 24 e_shoff: file offset where section headers begin
+00 00 00 00     # 28 e_flags: 0 for x86
+
+40 00           # 2A e_ehsize: size of this header (34: 32-bit, 40: 64-bit)
+      38 00     # 2C e_phentsize: size of each program header (20: 32-bit, 38: 64-bit)
+01 00           # 2E e_phnum: #program headers
+      40 00     # 30 e_shentsize: size of each section header (28: 32-bit, 40: 64-bit)
+
+00 00           # 32 e_shnum: #section headers
+      00 00     # 34 e_shstrndx: index of section header containing section names
+
+# >>>>>>>>>>>>> ELF PROGRAM HEADER <<<<<<<<<<<<< 
+
+01 00 00 00     # 38 p_type: segment type; 1: loadable
+05 00 00 00     # 50 p_flags: segment-dependent flags (1: X, 2: W, 4: R)
+
+D5 00 00 00 00 00 00 00     # 3C p_offset: file offset where segment begins
+D5 80 04 08 00 00 00 00    # 40 p_vaddr: virtual address of segment in memory (x86: 08048054)
+    
+00 00 00 00 00 00 00 00    # 44 p_paddr: physical address of segment, unspecified by 386 supplement
+AA 00 00 00 00 00 00 00    # 48 p_filesz: size in bytes of the segment in the file image ############
+AA 00 00 00 00 00 00 00    # 4C p_memsz: size in bytes of the segment in memory; p_filesz <= p_memsz
+
+00 00 20 00 00 00 00 00    # 54 p_align: 1000 for x86
+
+
+# >>>>>>>>>>>>> PROGRAM SEGMENT <<<<<<<<<<<<< 
+
+48 65 6C 6C 6F 20 57 6F 72 6C 64 21 0A
+
+45 72 72 6f 72 3a 20 75 73 61 67 65
+20 69 73 20 2e 2f 70 72 6f 67 72 61 6d
+20 3c 6e 75 6d 62 65 72 3e 20 3c 62 61
+73 65 3e 0a 00
+
+##########
+B8 01 00 00 00 # mov rax, 01
+BF 01 00 00 00 # mov rdi, 01
+48 BE # mov rsi, 64 bit pointeur
+85 80 04 08 00 00 00 00 # addressse du error msg en format 8 dcp
+BA 2A 00 00 00 # mov rdx, 43
+0F 05 # syscall
+######### 27 BYTES
+
+B8 3C 00 00 00 # 60 dans rax ou 3C
+48 31 FF # xor rdx rdx
+0F 05 # syscall
+
+
+#48 83 7C 24 10 00   # cmp qword [rsp + 16], 0
+#75 09		    # jne inc
+
+B8 00 00 00 00 # mov rax, 0
+49 c7 c0 00 00 00 00 # mov r8, 0
+49 c7 c1 00 00 00 00 # mov r9, 0
+
+48 8B 3C 24 # mov rdi, [rsp]
+48 83 FF 03 # cmp rdi, 3
+75 BE       # jne au msg d'erreur en legendeeee
+
+48 8B 74 24 18      #  mov rsi, [rsp + 16] argv[1] 
+48 8B 46 00         #  mov rax, [rsi + 0] argv[1][0]
+
+
+48 89 06            #  mov [rsi], rax
+48 8B 46 00         #  mov rax, [rsi + 1] argv[1][0]
+48 ff c6            #  inc rsi
+49 ff c1 	    #  inc r9
+80 3e 00            #  cmp byte ptr [rsi], 0 
+75 F5               #  je -8
+48 8B 46 00        #  mov rax, [rsi + 1] argv[1][0]
+
+bf 01 00 00 00 # mov rdi, 1
+48 83 ec 08 # sub rsp 8
+88 04 24 # mov byte [rsp], al
+b8 01 00 00 00 # mov rax, 1
+48 89 e6 # mov rsi, rsp
+ba 01 00 00 00 # mov rdx, 1
+0f 05 # sys call
+48 83 c4 08 # add rsp 8
+
+
+49 C7 C0 00 00 00 00 # mov r8, 0
+49 FF C0 # inc r8
+
+B8 01 00 00 00 # mov rax, 01
+BF 01 00 00 00 # mov rdi, 01
+48 BE # mov rsi, 64 bit pointeur
+78 80 04 08 00 00 00 00 # addressse de hello world en format 8 dcp
+BA 0D 00 00 00 # mov rdx, 13
+0F 05 # syscall
+
+4d 39 c8 # cmp r8, r9 
+75 DD # jne inc r8
+
+
+# Donc on en apprend quoi; on a la len de argv[2] dans r9, la len de la base
+# ft_atoi_base prend deux arguments (char *nombre, char *base)
+# faut convertir la base en int dans un compartiment jsp le nom
+# va aussi falloir faire la gestion d'erreur, probablement en utilisant des jump
+
+# eb c'est jmp donc eb position relatif
+
+eb FE # bah dcp un jmp de 4 qui skip les 4 00
+
+00 00 00 00
+
+
+
+
+B8 # mov rax (32 bit)
+3C 00 00 00 # 60 dans rax ou 3C
+48 31 FF # xor rdx rdx
+0F 05 # syscall
