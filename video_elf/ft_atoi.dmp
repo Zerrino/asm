@@ -108,7 +108,7 @@ B8 01 00 00 00 # mov rax, 01
 BF 01 00 00 00 # mov rdi, 01
 48 BE # mov rsi, 64 bit pointeur
 78 80 04 08 00 00 00 00 # addressse de hello world en format 8 dcp
-BA 0D 00 00 00 # mov rdx, 13
+BA 00 00 00 00 # mov rdx, 13
 0F 05 # syscall
 
 4d 39 c8 # cmp r8, r9 
@@ -216,12 +216,13 @@ B8 # mov rax (32 bit)
 80 3e 00            #  cmp byte ptr [rsi], 0 
 
 75 D0          # bah ca check quoi!
-eb 64
+eb 3B
 ##
 45 72 72 6f 72 3a 20 49 6e 76 61 6c 69 64 20 6e 75 6d 62 65 72 0a
 ## 22
 # donc maintenant la base est VALIDE! Prochaine etapde bah direct le reste
 ##########
+#<error>
 B8 01 00 00 00 # mov rax, 01
 BF 01 00 00 00 # mov rdi, 01
 48 BE # mov rsi, 64 bit pointeur
@@ -235,37 +236,131 @@ B8 # mov rax (32 bit)
 48 31 FF # xor rdx rdx
 0F 05 # syscall
 ## 10
+# Donc on arrive ici
+# On va dire que
+# r9 possede la len 
+# R12 doit toujours contenir la base
+#
+49 c7 c6 00 00 00 00 #    mov    r14,0x0
+4c 8b 64 24 10      #    mov    r12,QWORD PTR [rsp+ 16]
+41 80 3c 24 00     # cmp    BYTE PTR [r12],0x0
+74 33                   # je <finish> 
 
+######
+49 c7 c7 00 00 00 00 #    mov    r15,0x0
+48 8B 74 24 18      #  mov rsi, [rsp + 24] argv[2] 
+80 3e 00            #  cmp byte ptr [rsi], 0 
+74 11            #  je end
+44 8a 06            #  mov    r8b,BYTE PTR [rsi]
+45 3a 04 24         #  cmp    r8b,BYTE PTR [r12]
+74 08            #  je end
+48 ff c6            #  inc rsi
+49 ff c7            #  inc    r15
+eb ea               #  jmp
+## 34
+#<end>
 
-#48 8B 44 24 10     # mov rax, [rsp + 16] argv[1]
-# <func>
-49 c7 c2 00 00 00 00 # mov r10, 0
+4d 39 f9           #     cmp    r9,r15
+74 a1              #   je <error>
 
-4c 8b 6c 24 18      #    mov    r13,QWORD PTR [rsp+0x18]
-#<loop>
-44 8a 00            #   mov    r8b,BYTE PTR [rax]
+4d 0f af f1        #     imul   r14,r9
+4d 01 fe           #     add    r14,r15
 
-45 3a 45 00         #   cmp    r8b,BYTE PTR [r13+0x0]
-74 22               #   je <usage>
-49 ff c2            #   inc    r10
-49 ff c5            #   inc    r13
-41 80 7d 00 00       #   cmp    BYTE PTR [r13+0x0],0x0
-74 B9               #   je <error>
-eb e9               #   jmp <loop>
-#<usage>
-# faudrait faire d'une traite
-
-49 c7 c3 00 00 00 00 #   mov    r11,0x0
-48 8B 44 24 10       #   mov rax, [rsp + 16] argv[1]
-#<loop1>
-80 38 00             #   cmp    BYTE PTR [rax], 0
-74 0E                #   je <finish> v
-eb c9                #   jmp <func> v
-4d 01 d3             #   add    r11,r10
-4d 0f af d9          #   imul   r11,r9
-48 ff c0             #   inc    rax
-eb ed                #   jmp <loop1>
+49 ff c4           #  inc    r12
+eb c6              # jmp
 #<finish>
+#<bah> le resultat est cense se trouver dans r14 faut juste l'afficher maintenant
+
+eb 12
+59 6F 75 72 20 72 65 73 75 6C 74 20 69 73 20 3A 20 0A # 18
+#y a vrmt plus qu'a print notre magnifique resultat
+########
+B8 01 00 00 00 # mov rax, 01
+BF 01 00 00 00 # mov rdi, 01
+48 BE # mov rsi, 64 bit pointeur
+c0 82 04 08 00 00 00 00 # addressse du error msg en format 8 dcp
+BA 11 00 00 00 # mov rdx, 43
+0F 05 # syscall
+######### 27 BYTES
+49 c7 c7 00 00 00 00    # mov    r15,0x0
+
+###
+4d 89 f5                # mov    r13,r14
+49 83 fd 0a             # cmp    r13,0xa
+78 18			# js     <finish>
+49 ff c7                # inc    r15
+4c 89 e8                # mov    rax,r13
+48 31 d2                # xor    rdx,rdx
+48 c7 c1 0a 00 00 00    # mov    rcx,0xa
+48 f7 f1                # div    rcx
+49 89 c5                # mov    r13,rax
+eb e2                   # jmp
+
+
+
+#<finish>
+4d 89 e8               # mov    r8,r13
+49 83 c0 30            # add    r8,0x30
+##  37
+##
+4c 89 c0             #   mov    rax,r8
+50                   #   push   rax
+48 c7 c0 01 00 00 00 #   mov    rax,0x1
+48 c7 c7 01 00 00 00 #   mov    rdi,0x1
+48 89 e6             #   mov    rsi,rsp
+48 c7 c2 01 00 00 00 #   mov    rdx,0x1
+0f 05                #   syscall
+#30
+
+
+49 83 fe 0a           #  cmp    r14,0xa
+78 55                 # jn ??
+
+4d 89 fb             #   mov    r11,r15
+#3
+###
+4d 89 f5                # mov    r13,r14
+49 83 fb 00             # cmp    r11,0x0
+74 1b			# je     <finish>
+49 ff cb                #  dec    r11
+4c 89 e8                # mov    rax,r13
+48 31 d2                # xor    rdx,rdx
+48 c7 c1 0a 00 00 00    # mov    rcx,0xa
+48 f7 f1                # div    rcx
+49 89 c5                # mov    r13,rax
+49 89 d1                # mov    r9,rdx
+eb df                   # jmp
+## 36
+#<finish>
+4d 89 c8               # mov    r8,r9
+49 83 c0 30            # add    r8,0x30
+##  7
+##
+4c 89 c0             #   mov    rax,r8
+50                   #   push   rax
+48 c7 c0 01 00 00 00 #   mov    rax,0x1
+48 c7 c7 01 00 00 00 #   mov    rdi,0x1
+48 89 e6             #   mov    rsi,rsp
+48 c7 c2 01 00 00 00 #   mov    rdx,0x1
+0f 05                #   syscall
+#30
+
+49 ff cf             #   dec    r15
+49 83 ff 00          #   cmp    r15,0x1
+75 ab                  #   je
+
+##
+49 c7 c0 0a 00 00 00 #   mov    r8,0x41
+4c 89 c0             #   mov    rax,r8
+50                   #   push   rax
+48 c7 c0 01 00 00 00 #   mov    rax,0x1
+48 c7 c7 01 00 00 00 #   mov    rdi,0x1
+48 89 e6             #   mov    rsi,rsp
+48 c7 c2 01 00 00 00 #   mov    rdx,0x1
+0f 05                #   syscall
+#37
+
+
 
 B8 # mov rax (32 bit)
 3C 00 00 00 # 60 dans rax ou 3C
